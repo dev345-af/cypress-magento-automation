@@ -1,11 +1,13 @@
 describe('Magento Account Creation and Login Automation', () => {
   
-  const user = {
-    firstName: 'TestFirst',
-    lastName: 'TestLast',
-    email: `testuser_5@example.com`, // Unique email for every run
-    password: 'Test@12345'
-  };
+  let user;
+
+  // Load fixture before tests
+  before(() => {
+    cy.fixture('user').then((data) => {
+      user = data;
+    });
+  });
 
   it('should create a new account successfully', () => {
     cy.visit('https://magento.softwaretestingboard.com/');
@@ -35,7 +37,7 @@ describe('Magento Account Creation and Login Automation', () => {
     cy.contains('Sign Out').click();
   });
 
-  it.only('should log in with the newly created account', () => {
+  it('should log in with the newly created account', () => {
       // Assert Logout Success
       // Wait for logout and go to login page
       cy.visit('https://magento.softwaretestingboard.com/customer/account/login/');
