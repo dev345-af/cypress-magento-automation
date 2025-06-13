@@ -6,6 +6,8 @@ describe('Magento Account Creation and Login Automation', () => {
   before(() => {
     cy.fixture('user').then((data) => {
       user = data;
+      const randomNum = Date.now();
+      user.email = `testuser_${randomNum}@example.com`; // unique email per run
     });
   });
 
